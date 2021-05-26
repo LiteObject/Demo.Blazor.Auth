@@ -1,0 +1,17 @@
+﻿@page "/protected"
+<AuthorizeView>
+    <Authorized>
+        <h3>Protected Content</h3>        
+    </Authorized>
+    <NotAuthorized>
+        <h3>Not authorized to view protected content</h3>        
+    </NotAuthorized>
+
+</AuthorizeView>
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationState { get; set; }
+
+
+}

@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Demo.Blazor.Auth.Areas.Identity.Data;
+using Demo.Blazor.Auth.Models;
 
 namespace Demo.Blazor.Auth
 {
@@ -30,10 +32,6 @@ namespace Demo.Blazor.Auth
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options => {
-                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Demo.Blazor.Auth;Trusted_Connection=True;MultipleActiveResultSets=true");
-            });
-            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();

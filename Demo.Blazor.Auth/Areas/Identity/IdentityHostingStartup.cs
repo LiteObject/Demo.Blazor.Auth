@@ -4,6 +4,7 @@ using System.Linq;
 using Demo.Blazor.Auth.Areas.Identity.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -49,6 +50,7 @@ namespace Demo.Blazor.Auth.Areas.Identity
                     .AddEntityFrameworkStores<AppDbContext>();
 
                 services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
+                services.AddScoped<IEmailSender, EmailSender>();
             });
         }
     }

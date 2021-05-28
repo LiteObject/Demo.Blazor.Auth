@@ -10,24 +10,24 @@ using Microsoft.Extensions.Options;
 namespace Demo.Blazor.Auth.Areas.Identity
 {
     public class ApplicationUserClaimsPrincipalFactory:
-        UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>
+        UserClaimsPrincipalFactory<ApplicationUser>
     {
         public ApplicationUserClaimsPrincipalFactory(
             UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager,
             IOptions<IdentityOptions> options
-        ) : base(userManager, roleManager, options)
+        ) : base(userManager, options)
         {
         }
 
-        protected override async Task<ClaimsIdentity>
-            GenerateClaimsAsync(ApplicationUser user)
+        protected override async Task<ClaimsIdentity> GenerateClaimsAsync(ApplicationUser user)
         {
             var identity = await base.GenerateClaimsAsync(user);
 
             identity.AddClaim(new Claim(ClaimTypes.GivenName, user.FirstName));
             identity.AddClaim(new Claim(ClaimTypes.Surname, user.LastName));
-            
+            identity.AddClaim(new Claim("Organization", user.Organization));
+            identity.AddClaim(new Claim("JobTitle", user.JobTitle));
+
             return identity;
         }
     }

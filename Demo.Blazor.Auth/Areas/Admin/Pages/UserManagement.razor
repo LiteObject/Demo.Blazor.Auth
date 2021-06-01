@@ -1,0 +1,38 @@
+﻿@page "/admin/user-management"
+
+<h3>User Management</h3>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Email/Username</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Organization</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in users)
+        {
+            <tr @onclick="() => SetSelectedApplicationUser(user)">
+                <td>@user.Id</td>
+                <td>@user.Email</td>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Organization</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<hr />
+
+@if (selectedApplicationUser != null)
+{
+    <Demo.Blazor.Auth.Areas.Admin.Components.AddOrEditUser ComponentAction="Components.AddOrEditUser.ActionType.Edit" SelectedApplicationUser="selectedApplicationUser" OnUpdate="OnChildUpdate">
+    </Demo.Blazor.Auth.Areas.Admin.Components.AddOrEditUser>
+}
+else
+{
+    <Demo.Blazor.Auth.Areas.Admin.Components.AddOrEditUser ComponentAction="Components.AddOrEditUser.ActionType.Add"  SelectedApplicationUser="selectedApplicationUser" OnUpdate="OnChildUpdate">
+    </Demo.Blazor.Auth.Areas.Admin.Components.AddOrEditUser>
+}

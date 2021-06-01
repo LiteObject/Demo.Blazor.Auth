@@ -1,0 +1,91 @@
+﻿@using Demo.Blazor.Auth.Library;
+
+<h5>@ComponentAction.GetDescription()</h5>
+<hr />
+<h5>User Details</h5>
+
+@if (InputUserModel != null)
+{
+    <EditForm EditContext="@editContext" OnSubmit="@HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="input_email_@InputUserModel.Id" placeholder="name@example.com" @bind-value="InputUserModel.Email" disabled="@(ComponentAction == ActionType.Edit)">
+            <label for="floatingInput">Email address</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="input_firstname_@InputUserModel.Id" placeholder="First Name" @bind-value="InputUserModel.FirstName">
+            <label for="floatingInput">First Name</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="input_lastname_@InputUserModel.Id" placeholder="Last Name" @bind-value="InputUserModel.LastName">
+            <label for="floatingInput">Last Name</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="input_organization_@InputUserModel.Id" placeholder="Organization" @bind-value="InputUserModel.Organization">
+            <label for="floatingInput">Organization</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="input_jobtitle_@InputUserModel.Id" placeholder="Job Title" @bind-value="InputUserModel.JobTitle">
+            <label for="floatingInput">Job Title</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="input_phonenumber_@InputUserModel.Id" placeholder="Phone Number" @bind-value="InputUserModel.PhoneNumber">
+            <label for="floatingInput">Phone Number</label>
+        </div>
+
+        @if (ComponentAction == ActionType.Add)
+        {
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="input_phonenumber_@InputUserModel.Id" placeholder="Password" @bind-value="InputUserModel.Password">
+                <label for="floatingInput">Password</label>
+            </div>
+        }
+
+        @if (ComponentAction == ActionType.Edit)
+        {
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="input_updatedon_@InputUserModel.Id" value="@InputUserModel.UpdatedOn" disabled>
+                <label for="floatingInput">Updated On</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="input_updatedby_@InputUserModel.Id" value="@InputUserModel.UpdatedBy" disabled>
+                <label for="floatingInput">Updated By</label>
+            </div>
+        }
+
+        <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+    </EditForm>
+}
+
+<hr />
+<h5>Available Roles</h5>
+
+@foreach (var role in availableRoles)
+{
+    <div class="form-check">
+        @if (userRoles.Contains(role.Name))
+        {
+            <input class="form-check-input" type="checkbox" value="@role.Id" id="ck_@role.Name" @onchange="(e) => UpdateUserRoles(role, e)" checked>
+        }
+        else
+        {
+            <input class="form-check-input" type="checkbox" value="@role.Id" id="ck_@role.Name" @onchange="(e) => UpdateUserRoles(role, e)">
+        }
+
+        <label class="form-check-label" for="ck_@role.Name">
+            @role.Name
+        </label>
+    </div>
+}
+
+@code {
+
+}

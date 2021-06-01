@@ -16,6 +16,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Demo.Blazor.Auth.Areas.Identity.Data;
 using Demo.Blazor.Auth.Models;
+using Blazored.Toast;
 
 namespace Demo.Blazor.Auth
 {
@@ -36,6 +37,7 @@ namespace Demo.Blazor.Auth
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
             services.AddSingleton<WeatherForecastService>();
+            services.AddBlazoredToast();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

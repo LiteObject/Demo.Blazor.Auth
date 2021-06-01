@@ -1,0 +1,37 @@
+﻿@page "/admin/role-management"
+
+<h3>Role Management</h3>
+
+<AuthorizeView>
+    <Authorized>        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th width="40%">Id</th>
+                    <th width="40%">Role</th>
+                    <th width="20%">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in roles)
+                {
+                    <tr>
+                        <td>@role.Id</td>
+                        <td>@role.Name</td>
+                        <td>EDIT</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </Authorized>
+    <NotAuthorized>
+        This content is displayed if the user is NOT Authorized
+    </NotAuthorized>
+</AuthorizeView>
+
+
+
+@code {
+
+}
